@@ -2,6 +2,7 @@ package com.javaex.ex03;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,6 +28,7 @@ public class Ex04 {
 		//스트림 준비
 		InputStream in = new FileInputStream("C:\\javaStudy\\PhoneDB.txt");
 		InputStreamReader isr = new InputStreamReader(in, "UTF-8");
+		FileReader fr = new FileReader("C:\\javaStudy\\PhoneDB.txt");
 		ArrayList<Person> pList = new ArrayList<Person>();
 		//보조 스트림
 		BufferedReader br = new BufferedReader(isr);
@@ -40,7 +42,25 @@ public class Ex04 {
 				System.out.println("읽기 끝");
 				break;
 			}
+			
+			System.out.println(str);
+			
+			String[] parts = str.split(",");
+			if(parts.length == 3) {
+				String name = parts[0];
+				String hp = parts[1];
+				String company = parts[2];
+				
+				Person p = new Person(name, hp, company);
+				pList.add(p);
+			}
 		}
+		
+		for(int i = 0 ; i<pList.size() ; i++) {
+			System.out.println("======================");
+			System.out.println(pList.get(i).toString());
+		}
+		
 		//스트림 닫기
 		isr.close();
 		br.close();
